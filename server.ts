@@ -19,7 +19,7 @@ import sellerRoutes from './server/routes/sellerRoutes.ts';
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 // Resolve static directory
 let clientPath = path.join(process.cwd(), 'client');
