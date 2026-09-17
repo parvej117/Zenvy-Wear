@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Zenvy Wear | Wear Your Confidence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence</span>
+        </a>
+      </div>
+      <div class="nav-actions">
+        <a href="/shop.html" class="nav-link">Shop Collection</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container" style="padding-top: 60px; padding-bottom: 90px; max-width: 480px;">
+    <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 36px 32px; box-shadow: var(--shadow-sm);">
+      
+      <div style="text-align: center; margin-bottom: 28px;">
+        <span class="section-tag">Member Access</span>
+        <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; margin-top: 4px;">Sign In to Zenvy</h2>
+        <p style="color: #71717a; font-size: 0.9rem; margin-top: 4px;">Access your orders, saved pieces, and private drops.</p>
+      </div>
+
+      <!-- Error Alert -->
+      <div id="auth-error-alert" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; border-radius: 6px; padding: 12px 16px; font-size: 0.88rem; margin-bottom: 20px;"></div>
+
+      <!-- Quick Demo Logins Bar -->
+      <div style="background: #f4f4f5; border: 1px dashed #d4d4d8; border-radius: 6px; padding: 14px; margin-bottom: 24px; text-align: center;">
+        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #52525b; display: block; margin-bottom: 8px;">
+          <i class="fas fa-bolt" style="color: #b39268;"></i> One-Click Demo Logins:
+        </span>
+        <div style="display: flex; gap: 8px; justify-content: center;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="fillDemoCustomer()" style="font-size: 0.75rem; padding: 6px 12px; background: #fff;">
+            <i class="fas fa-user"></i> Customer Demo
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="fillDemoAdmin()" style="font-size: 0.75rem; padding: 6px 12px; background: #fff;">
+            <i class="fas fa-shield-alt"></i> Admin Demo
+          </button>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form onsubmit="handleLogin(event)">
+        <div style="margin-bottom: 18px;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Email Address</label>
+          <input type="email" id="login-email" required placeholder="customer@zenvywear.com" style="width: 100%; padding: 12px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.92rem;">
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label style="font-size: 0.85rem; font-weight: 600;">Password</label>
+            <span style="font-size: 0.78rem; color: #71717a; cursor: pointer;" onclick="showToast('For demo accounts: customer123 or admin123456', 'info')">Forgot Password?</span>
+          </div>
+          <div style="position: relative;">
+            <input type="password" id="login-password" required placeholder="••••••••" style="width: 100%; padding: 12px 42px 12px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.92rem;">
+            <button type="button" onclick="togglePasswordVisibility('login-password', this)" style="position: absolute; right: 12px; top: 13px; color: #71717a;">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; height: 48px;">
+          Sign In
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.88rem; color: #71717a;">
+        Don't have a Zenvy account yet? <a href="/register.html" style="font-weight: 700; color: #111; text-decoration: underline;">Create Account</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

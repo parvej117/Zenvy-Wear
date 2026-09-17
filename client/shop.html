@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Collection — Zenvy Wear | Wear Your Confidence</title>
+  <meta name="description" content="Browse luxury menswear and womenswear collection by Zenvy Wear. Filter by category, fit, size, and price.">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Free Express Delivery in Dhaka on orders above <span>৳ 5,000</span> &bull; Use code <span>ZENVY10</span> for 10% Off
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link active">Shop Collection</a>
+        <a href="/shop.html?category=Men" class="nav-link">Men</a>
+        <a href="/shop.html?category=Women" class="nav-link">Women</a>
+        <a href="/about.html" class="nav-link">About Brand</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/wishlist.html" class="nav-action-btn" title="Saved Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/cart.html" class="nav-action-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/login.html" class="nav-action-btn nav-account-link" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+
+        <button class="hamburger-btn" id="hamburger-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-nav-content">
+      <div class="mobile-nav-header">
+        <span class="brand-logo" style="font-size: 1.3rem;">ZENVY WEAR</span>
+        <button id="mobile-nav-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="/" class="mobile-nav-link">Home</a>
+        <a href="/shop.html" class="mobile-nav-link">Shop All</a>
+        <a href="/shop.html?gender=Men" class="mobile-nav-link">Men</a>
+        <a href="/shop.html?gender=Women" class="mobile-nav-link">Women</a>
+        <a href="/wishlist.html" class="mobile-nav-link">Wishlist</a>
+        <a href="/cart.html" class="mobile-nav-link">Cart</a>
+        <a href="/orders.html" class="mobile-nav-link">My Orders</a>
+        <a href="/about.html" class="mobile-nav-link">About</a>
+        <a href="/contact.html" class="mobile-nav-link">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Banner -->
+  <div style="background-color: #f4efe9; padding: 48px 0; border-bottom: 1px solid var(--color-border); text-align: center;">
+    <div class="container">
+      <span class="section-tag">Zenvy Wear Wardrobe</span>
+      <h1 style="font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; margin-top: 4px;">The Complete Collection</h1>
+      <p style="color: var(--color-medium-gray); margin-top: 6px;">Sophisticated tailoring, timeless essentials, and modern outerwear designed for poise.</p>
+    </div>
+  </div>
+
+  <!-- Shop Main Content -->
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    
+    <!-- Mobile Filter Open Bar -->
+    <div style="display: none; align-items: center; justify-content: space-between; margin-bottom: 24px;" class="mobile-filter-trigger">
+      <button class="btn btn-secondary btn-sm" id="mobile-filter-open">
+        <i class="fas fa-sliders-h"></i> Filters & Sort
+      </button>
+      <span id="mobile-item-count" style="font-size: 0.85rem; color: #71717a;">Zenvy Wear Collection</span>
+    </div>
+
+    <!-- Shop Backdrop for Mobile Filter Drawer -->
+    <div class="shop-sidebar-backdrop" id="shop-sidebar-backdrop"></div>
+
+    <div class="shop-layout" style="display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start;">
+      
+      <!-- Sidebar Filters -->
+      <aside class="shop-sidebar" id="shop-sidebar">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <h4 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Refine Search</h4>
+          <button id="mobile-filter-close" style="display: none; font-size: 1.2rem;"><i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- Gender Filter -->
+        <div style="margin-bottom: 28px;">
+          <label style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #71717a; display: block; margin-bottom: 12px;">Gender / Department</label>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="filter-link active" data-filter-gender="all" style="text-align: left; font-size: 0.9rem; font-weight: 500;">All Apparel</button>
+            <button class="filter-link" data-filter-gender="Men" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Men's Collection</button>
+            <button class="filter-link" data-filter-gender="Women" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Women's Collection</button>
+            <button class="filter-link" data-filter-gender="Unisex" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Unisex Capsule</button>
+          </div>
+        </div>
+
+        <!-- Categories Filter -->
+        <div style="margin-bottom: 28px;">
+          <label style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #71717a; display: block; margin-bottom: 12px;">Categories</label>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="filter-link active" data-filter-cat="all" style="text-align: left; font-size: 0.9rem; font-weight: 500;">All Categories</button>
+            <button class="filter-link" data-filter-cat="Casual Shirts" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Casual Shirts</button>
+            <button class="filter-link" data-filter-cat="Formal Blazers" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Formal Blazers</button>
+            <button class="filter-link" data-filter-cat="Tees & Polos" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Tees & Polos</button>
+            <button class="filter-link" data-filter-cat="Trousers & Chinos" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Trousers & Chinos</button>
+            <button class="filter-link" data-filter-cat="Outerwear" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Outerwear & Jackets</button>
+            <button class="filter-link" data-filter-cat="Dresses" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Dresses & Gowns</button>
+            <button class="filter-link" data-filter-cat="Knitwear" style="text-align: left; font-size: 0.9rem; font-weight: 500;">Knitwear Sweaters</button>
+          </div>
+        </div>
+
+        <!-- Price Range -->
+        <div style="margin-bottom: 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <label style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #71717a;">Max Budget</label>
+            <span id="price-range-val" style="font-weight: 700; font-size: 0.92rem;">৳ 6,000</span>
+          </div>
+          <input type="range" id="price-range-slider" min="500" max="6000" step="100" value="6000" style="width: 100%; accent-color: #111;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #71717a; margin-top: 4px;">
+            <span>৳ 500</span>
+            <span>৳ 6,000</span>
+          </div>
+        </div>
+
+        <!-- Sizes Filter -->
+        <div style="margin-bottom: 28px;">
+          <label style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #71717a; display: block; margin-bottom: 12px;">Filter By Size</label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            ${['S', 'M', 'L', 'XL', 'XXL', '30', '32', '34'].map(sz => `
+              <button class="filter-size-btn" data-size="${sz}" style="width: 38px; height: 36px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.82rem; font-weight: 600; background: #fff;">
+                ${sz}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Color Filter -->
+        <div style="margin-bottom: 28px;">
+          <label style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #71717a; display: block; margin-bottom: 12px;">Color Palette</label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            ${['Black', 'Navy', 'White', 'Charcoal', 'Beige', 'Olive', 'Emerald'].map(c => `
+              <button class="filter-color-btn" data-color="${c}" style="padding: 4px 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.78rem; font-weight: 500; background: #fff;">
+                ${c}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-sm" onclick="resetShopFilters()" style="width: 100%;">
+          <i class="fas fa-undo"></i> Reset Filters
+        </button>
+      </aside>
+
+      <!-- Products Grid & Controls Area -->
+      <main>
+        <!-- Top Controls Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; background: #fff; padding: 14px 20px; border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
+          
+          <!-- Search input -->
+          <div style="position: relative; width: 280px; max-width: 100%;">
+            <input type="text" id="shop-search-input" placeholder="Search by name, fabric, style..." style="width: 100%; padding: 8px 14px; font-size: 0.85rem; border: 1px solid #ddd; border-radius: 4px;">
+            <i class="fas fa-search" style="position: absolute; right: 12px; top: 12px; color: #a1a1aa; font-size: 0.85rem;"></i>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <span id="shop-product-count" style="font-size: 0.85rem; color: #71717a;">Loading products...</span>
+
+            <!-- Sort By -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <label for="shop-sort-select" style="font-size: 0.82rem; font-weight: 600; color: #71717a; white-space: nowrap;">Sort By:</label>
+              <select id="shop-sort-select" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.85rem; background: #fff; font-weight: 500;">
+                <option value="newest">Newest Releases</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="product-grid" id="shop-products-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="shop-pagination" style="display: flex; justify-content: center; margin-top: 48px;"></div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-copyright-block">
+          <div class="footer-copy-text">&copy; 2026 Zenvy Wear. All Rights Reserved.</div>
+          <div class="footer-dev-text">Designed &amp; Developed by <strong>MD Masum Parvej</strong></div>
+        </div>
+        <div class="payment-icons">
+          <span class="payment-badge">Cash on Delivery</span>
+          <span class="payment-badge" style="background:#e2136e;">bKash</span>
+          <span class="payment-badge" style="background:#f7941d;">Nagad</span>
+          <span class="payment-badge">Visa / Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/products.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initShopPage();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Orders — Zenvy Wear | Wear Your Confidence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Nationwide Courier Tracking &bull; 24-Hour Dispatch across Dhaka &bull; 7-Day Exchange Guarantee
+  </div>
+
+  <!-- Header -->
+  <header class="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link">Shop Collection</a>
+        <a href="/about.html" class="nav-link">About Brand</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/wishlist.html" class="nav-action-btn" title="Saved Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/cart.html" class="nav-action-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/login.html" class="nav-action-btn nav-account-link" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+
+        <button class="hamburger-btn" id="hamburger-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <div style="background-color: #f4efe9; padding: 40px 0; border-bottom: 1px solid var(--color-border); text-align: center;">
+    <div class="container">
+      <span class="section-tag">Courier Dispatch</span>
+      <h1 style="font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; margin-top: 4px;">Track Your Parcel</h1>
+      <p style="color: var(--color-medium-gray); margin-top: 4px;">Real-time shipment progress for your Zenvy Wear parcels.</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top: 50px; padding-bottom: 80px; max-width: 860px;">
+    
+    <!-- Tracking Lookup Box -->
+    <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 28px; margin-bottom: 36px; box-shadow: var(--shadow-sm);">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Quick Order Lookup</h3>
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="order-search-query" placeholder="Enter Order # (e.g. ZW-ORD-839201) or Tracking Code" style="flex: 1; padding: 12px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+        <button class="btn btn-primary" onclick="searchSpecificOrder()">
+          <i class="fas fa-search"></i> Track
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Orders Container -->
+    <div id="orders-container">
+      <div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin fa-2x"></i><p style="margin-top: 10px; color:#71717a;">Retrieving shipment records...</p></div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-copyright-block">
+          <div class="footer-copy-text">&copy; 2026 Zenvy Wear. All Rights Reserved.</div>
+          <div class="footer-dev-text">Designed &amp; Developed by <strong>MD Masum Parvej</strong></div>
+        </div>
+        <div class="payment-icons">
+          <span class="payment-badge">Cash on Delivery</span>
+          <span class="payment-badge" style="background:#e2136e;">bKash</span>
+          <span class="payment-badge" style="background:#f7941d;">Nagad</span>
+          <span class="payment-badge">Visa / Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    async function loadAllUserOrders() {
+      const container = document.getElementById('orders-container');
+      const res = await apiRequest('/orders');
+
+      if (!res.ok || !res.data.orders) {
+        container.innerHTML = `
+          <div style="text-align:center; padding: 40px; background:#fff; border-radius: 8px; border:1px solid #ddd;">
+            <p>Please sign in to view your orders automatically, or use the search box above with your order number.</p>
+            <a href="/login.html" class="btn btn-primary btn-sm" style="margin-top: 14px;">Sign In</a>
+          </div>
+        `;
+        return;
+      }
+
+      const orders = res.data.orders;
+      if (orders.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding: 60px 20px; background:#fff; border-radius:8px; border: 1px dashed #ddd;">
+            <i class="fas fa-box-open fa-3x" style="color: #a1a1aa; margin-bottom: 16px;"></i>
+            <h4>No orders found</h4>
+            <p style="color: #71717a; margin-top: 6px;">You haven't placed any orders yet.</p>
+            <a href="/shop.html" class="btn btn-primary btn-sm" style="margin-top: 16px;">Explore Collection</a>
+          </div>
+        `;
+        return;
+      }
+
+      renderOrdersList(orders);
+    }
+
+    function renderOrdersList(orders) {
+      const container = document.getElementById('orders-container');
+      container.innerHTML = orders.map(ord => {
+        const statuses = ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered'];
+        const currentIdx = statuses.indexOf(ord.orderStatus);
+
+        return `
+          <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 14px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <span style="font-size: 0.78rem; text-transform: uppercase; color: #71717a; letter-spacing: 0.08em;">Order #</span>
+                <strong style="font-size: 1.05rem; margin-left: 6px;">${ord.orderNumber}</strong>
+                <span style="font-size: 0.8rem; color: #71717a; margin-left: 14px;">Tracking: <strong>${ord.trackingCode || 'ZW-BD-EXP'}</strong></span>
+              </div>
+              <div>
+                <span class="status-pill status-${ord.orderStatus.toLowerCase()}">${ord.orderStatus}</span>
+              </div>
+            </div>
+
+            <!-- Progress Tracker Bar -->
+            <div style="display: flex; justify-content: space-between; margin: 24px 0 28px; position: relative;">
+              ${statuses.map((st, i) => `
+                <div style="display: flex; flex-direction: column; align-items: center; z-index: 2; width: 80px; text-align: center;">
+                  <div style="width: 28px; height: 28px; border-radius: 50%; background: ${i <= currentIdx ? '#111' : '#e4e4e7'}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; margin-bottom: 6px;">
+                    ${i <= currentIdx ? '<i class="fas fa-check"></i>' : (i + 1)}
+                  </div>
+                  <span style="font-size: 0.72rem; font-weight: ${i === currentIdx ? '700' : '500'}; color: ${i <= currentIdx ? '#111' : '#a1a1aa'};">${st}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Multi-Seller Packages Breakdown -->
+            ${ord.sellerPackages && ord.sellerPackages.length > 0 ? `
+              <div style="margin-bottom: 16px;">
+                <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #71717a; margin-bottom: 8px;">
+                  <i class="fas fa-boxes"></i> Multi-Seller Delivery Packages (${ord.sellerPackages.length})
+                </div>
+                ${ord.sellerPackages.map((pkg, idx) => `
+                  <div class="seller-package-card" style="margin-bottom: 12px; padding: 14px; background: #fdfdfd; border: 1px solid #e4e4e7; border-radius: 6px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px dashed #e4e4e7; padding-bottom: 8px;">
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.75rem; background: #111; color: #fff; padding: 2px 6px; border-radius: 3px; font-weight: 700;">Pkg ${idx + 1}</span>
+                        <strong style="font-size: 0.9rem;">${pkg.sellerName}</strong>
+                        <span class="seller-tag-badge seller-tag-official"><i class="fas fa-check-circle"></i> Verified</span>
+                      </div>
+                      <div>
+                        <span class="seller-tag-badge" style="background: ${pkg.status === 'Delivered' ? '#dcfce7' : pkg.status === 'Shipped' ? '#e0e7ff' : '#fef3c7'}; color: #111; font-weight: 600;">
+                          ${pkg.status || 'Processing'}
+                        </span>
+                      </div>
+                    </div>
+                    ${pkg.items.map(it => `
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 0.84rem;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                          <img src="${it.image}" alt="${it.name}" style="width: 32px; height: 38px; object-fit: cover; border-radius: 3px;">
+                          <div>
+                            <div>${it.name}</div>
+                            <div style="font-size: 0.72rem; color: #71717a;">Qty: ${it.quantity} | ${it.size} | ${it.color}</div>
+                          </div>
+                        </div>
+                        <strong>${formatBDT(it.price * it.quantity)}</strong>
+                      </div>
+                    `).join('')}
+                    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 6px; font-size: 0.8rem; color: #71717a; border-top: 1px solid #f0f0f0; padding-top: 6px;">
+                      <span>Package Subtotal: <strong style="color: #111;">${formatBDT(pkg.subtotal)}</strong></span>
+                      <span>Shipping: <strong style="color: #111;">${pkg.shippingFee ? formatBDT(pkg.shippingFee) : 'FREE'}</strong></span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : `
+              <!-- Legacy single-package Items summary -->
+              <div style="background: #fafafa; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+                ${ord.items.map(it => `
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                      <img src="${it.image}" alt="${it.name}" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;">
+                      <div>
+                        <strong style="font-size: 0.88rem;">${it.name}</strong>
+                        <div style="font-size: 0.76rem; color: #71717a;">Qty: ${it.quantity} | ${it.size} | ${it.color}</div>
+                      </div>
+                    </div>
+                    <strong style="font-size: 0.88rem;">${formatBDT(it.price * it.quantity)}</strong>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 14px;">
+              <div style="font-size: 0.82rem; color: #71717a;">
+                <span>Recipient: <strong>${ord.shippingAddress?.fullName}</strong> (${ord.shippingAddress?.phone})</span>
+              </div>
+              <div>
+                <span>Total Paid/Due: </span>
+                <strong style="font-size: 1.15rem; color: #111;">${formatBDT(ord.total)}</strong>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function searchSpecificOrder() {
+      const q = document.getElementById('order-search-query').value.trim();
+      if (!q) {
+        showToast('Please enter an order number or tracking ID', 'info');
+        return;
+      }
+
+      const res = await apiRequest(`/orders/track/${encodeURIComponent(q)}`);
+      if (res.ok && res.data.order) {
+        renderOrdersList([res.data.order]);
+        showToast('Shipment status found!', 'success');
+      } else {
+        showToast('No shipment record found with that identifier.', 'error');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadAllUserOrders);
+  </script>
+</body>
+</html>

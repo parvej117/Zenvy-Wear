@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registered Users — Zenvy Wear Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <span class="brand-title">ZENVY WEAR</span>
+        <span class="badge-admin">ATELIER</span>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="/admin/dashboard.html" class="admin-nav-item">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/admin/products.html" class="admin-nav-item">
+          <i class="fas fa-tshirt"></i> Products Inventory
+        </a>
+        <a href="/admin/orders.html" class="admin-nav-item">
+          <i class="fas fa-shopping-bag"></i> Customer Orders
+        </a>
+        <a href="/admin/users.html" class="admin-nav-item active">
+          <i class="fas fa-users"></i> Registered Users
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="/" target="_blank" class="admin-nav-item" style="color: #c2a684;">
+          <i class="fas fa-external-link-alt"></i> View Storefront
+        </a>
+        <button onclick="logoutUser()" class="admin-nav-item" style="color: #f87171; background: none; border: none; width: 100%; cursor: pointer;">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div class="admin-topbar-title">
+          <h3>Registered Users & Client Profiles</h3>
+        </div>
+      </div>
+
+      <div class="admin-content-body">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h4>User Accounts Database</h4>
+          </div>
+
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Joined Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-table-body">
+                <tr><td colspan="7" style="text-align:center; padding:30px;"><i class="fas fa-spinner fa-spin"></i> Loading users...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAdminUsers();
+    });
+  </script>
+</body>
+</html>

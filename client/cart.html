@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Bag — Zenvy Wear | Wear Your Confidence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Free Express Delivery on orders over <span>৳ 5,000</span> &bull; 7-Day Hassle-Free Doorstep Exchange
+  </div>
+
+  <!-- Header -->
+  <header class="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link">Shop Collection</a>
+        <a href="/shop.html?category=Men" class="nav-link">Men</a>
+        <a href="/shop.html?category=Women" class="nav-link">Women</a>
+        <a href="/about.html" class="nav-link">About Brand</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/wishlist.html" class="nav-action-btn" title="Saved Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/cart.html" class="nav-action-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/login.html" class="nav-action-btn nav-account-link" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+
+        <button class="hamburger-btn" id="hamburger-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <div style="background-color: #f4efe9; padding: 40px 0; border-bottom: 1px solid var(--color-border); text-align: center;">
+    <div class="container">
+      <span class="section-tag">Bag Review</span>
+      <h1 style="font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; margin-top: 4px;">Your Shopping Bag</h1>
+    </div>
+  </div>
+
+  <!-- Cart Content Area -->
+  <div class="container" style="padding-top: 50px; padding-bottom: 80px;">
+    
+    <!-- Empty State -->
+    <div id="cart-empty-state" style="display: none; text-align: center; padding: 80px 20px;">
+      <i class="fas fa-shopping-bag fa-3x" style="color: #a1a1aa; margin-bottom: 20px;"></i>
+      <h2 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 10px;">Your shopping bag is empty</h2>
+      <p style="color: #71717a; margin-bottom: 30px; max-width: 450px; margin-left: auto; margin-right: auto;">
+        Discover curated designer pieces crafted for effortless confidence.
+      </p>
+      <a href="/shop.html" class="btn btn-primary btn-lg">Explore The Collection</a>
+    </div>
+
+    <!-- Active Cart View -->
+    <div id="cart-main-view" style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 48px; align-items: start;">
+      
+      <!-- Items List Table -->
+      <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; box-shadow: var(--shadow-sm); overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 1px solid #e4e4e7; font-size: 0.82rem; text-transform: uppercase; color: #71717a; letter-spacing: 0.08em;">
+              <th style="padding-bottom: 14px;">Product</th>
+              <th style="padding-bottom: 14px;">Price</th>
+              <th style="padding-bottom: 14px;">Quantity</th>
+              <th style="padding-bottom: 14px; text-align: right;">Total</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items-container">
+            <!-- Loaded via cart.js -->
+          </tbody>
+        </table>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 18px; border-top: 1px solid #eee;">
+          <a href="/shop.html" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+        </div>
+      </div>
+
+      <!-- Order Summary Card -->
+      <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 28px; box-shadow: var(--shadow-sm);">
+        <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #eee;">
+          Order Summary
+        </h3>
+
+        <!-- Location Selector -->
+        <div style="margin-bottom: 20px;">
+          <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Delivery Destination</label>
+          <select id="cart-delivery-zone" style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; background: #fff;">
+            <option value="dhaka">Inside Dhaka (৳80 • 24-48 Hours)</option>
+            <option value="outside">Outside Dhaka (৳130 • 48-72 Hours)</option>
+          </select>
+        </div>
+
+        <!-- Coupon Input -->
+        <form onsubmit="applyCoupon(event)" style="display: flex; gap: 8px; margin-bottom: 24px;">
+          <input type="text" id="cart-coupon-input" placeholder="Promo code (e.g. ZENVY10)" style="flex: 1; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.88rem; text-transform: uppercase;">
+          <button type="submit" class="btn btn-secondary btn-sm" style="padding: 10px 16px;">Apply</button>
+        </form>
+
+        <!-- Summary lines -->
+        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem; border-top: 1px solid #eee; padding-top: 16px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #71717a;">Subtotal</span>
+            <span id="cart-subtotal-val" style="font-weight: 600;">৳ 0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #71717a;">Promo Discount</span>
+            <span id="cart-discount-val" style="font-weight: 600; color: #16a34a;">৳ 0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #71717a;">Estimated Shipping</span>
+            <span id="cart-shipping-val" style="font-weight: 600;">৳ 80</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: 700; color: #111; border-top: 1px solid #eee; padding-top: 16px; margin-top: 6px;">
+            <span>Grand Total</span>
+            <span id="cart-total-val">৳ 0</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 26px;">
+          <a href="/checkout.html" class="btn btn-primary btn-lg" style="width: 100%;">
+            Proceed to Checkout <i class="fas fa-lock" style="font-size: 0.8rem; margin-left: 8px;"></i>
+          </a>
+        </div>
+
+        <div style="margin-top: 18px; text-align: center; font-size: 0.8rem; color: #71717a;">
+          <i class="fas fa-shield-alt" style="color: #16a34a; margin-right: 6px;"></i> 256-Bit SSL Encrypted Checkout
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Zenvy Wear Ltd. "Wear Your Confidence."</div>
+        <div class="payment-icons">
+          <span class="payment-badge">Cash on Delivery</span>
+          <span class="payment-badge" style="background:#e2136e;">bKash</span>
+          <span class="payment-badge" style="background:#f7941d;">Nagad</span>
+          <span class="payment-badge">Visa / Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/cart.js"></script>
+</body>
+</html>

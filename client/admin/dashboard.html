@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Zenvy Wear</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <span class="brand-title">ZENVY WEAR</span>
+        <span class="badge-admin">ATELIER</span>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="/admin/dashboard.html" class="admin-nav-item active">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/admin/products.html" class="admin-nav-item">
+          <i class="fas fa-tshirt"></i> Products Inventory
+        </a>
+        <a href="/admin/orders.html" class="admin-nav-item">
+          <i class="fas fa-shopping-bag"></i> Customer Orders
+        </a>
+        <a href="/admin/users.html" class="admin-nav-item">
+          <i class="fas fa-users"></i> Registered Users
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="/" target="_blank" class="admin-nav-item" style="color: #c2a684;">
+          <i class="fas fa-external-link-alt"></i> View Storefront
+        </a>
+        <button onclick="logoutUser()" class="admin-nav-item" style="color: #f87171; background: none; border: none; width: 100%; cursor: pointer;">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Section -->
+    <main class="admin-main">
+      
+      <!-- Topbar -->
+      <div class="admin-topbar">
+        <div class="admin-topbar-title">
+          <h3>Business Overview</h3>
+        </div>
+        <div class="admin-user-menu">
+          <span style="font-size: 0.9rem; font-weight: 600;" id="admin-user-name">Master Administrator</span>
+          <div class="admin-avatar">A</div>
+        </div>
+      </div>
+
+      <!-- Body Content -->
+      <div class="admin-content-body">
+        
+        <!-- Metrics Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Total Revenue</div>
+              <div class="stat-value" id="admin-stat-sales">৳ 0</div>
+            </div>
+            <div class="stat-icon" style="background: #ecfdf5; color: #059669;">
+              <i class="fas fa-coins"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Total Orders</div>
+              <div class="stat-value" id="admin-stat-orders">0</div>
+            </div>
+            <div class="stat-icon" style="background: #eff6ff; color: #2563eb;">
+              <i class="fas fa-box"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Live Apparel</div>
+              <div class="stat-value" id="admin-stat-products">0</div>
+            </div>
+            <div class="stat-icon" style="background: #faf5ff; color: #9333ea;">
+              <i class="fas fa-tshirt"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Registered Customers</div>
+              <div class="stat-value" id="admin-stat-users">0</div>
+            </div>
+            <div class="stat-icon" style="background: #fff7ed; color: #ea580c;">
+              <i class="fas fa-user-friends"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Sales Bar Representation -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h4>Sales Trend (Monthly Revenue)</h4>
+            <span style="font-size: 0.82rem; color: #71717a;">Real-time Bangladesh Taka (৳)</span>
+          </div>
+          <div class="simple-bar-chart" id="admin-sales-chart">
+            <div style="text-align: center; width: 100%; padding: 30px;"><i class="fas fa-spinner fa-spin"></i> Calculating chart...</div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h4>Recent Orders & Dispatch Status</h4>
+            <a href="/admin/orders.html" class="btn btn-secondary btn-sm">View All Orders</a>
+          </div>
+
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Payment</th>
+                  <th>Fulfillment Status</th>
+                </tr>
+              </thead>
+              <tbody id="recent-orders-table-body">
+                <tr><td colspan="6" style="text-align:center; padding:30px;"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAdminDashboard();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Zenvy Wear",
+  "description": "Premium Multi-Category Fashion & Lifestyle Marketplace in Bangladesh. Wear Your Confidence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="50%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#18181b"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f4f5"/>
+      <stop offset="100%" stop-color="#a1a1aa"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3f3f46"/>
+      <stop offset="100%" stop-color="#27272a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="400" height="400" rx="36" fill="url(#bgGrad)"/>
+  
+  <!-- Outer Decorative Ring -->
+  <circle cx="200" cy="180" r="130" fill="none" stroke="url(#ringGrad)" stroke-width="2" stroke-dasharray="6 6"/>
+  <circle cx="200" cy="180" r="118" fill="#121214" stroke="#27272a" stroke-width="1.5"/>
+
+  <!-- Minimalist Executive Avatar Silhouette -->
+  <!-- Head & Shoulders -->
+  <circle cx="200" cy="148" r="48" fill="#27272a" stroke="#3f3f46" stroke-width="2"/>
+  
+  <!-- Monogram Initials on avatar head badge -->
+  <text x="200" y="157" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="700" fill="url(#accentGrad)" text-anchor="middle" letter-spacing="2">MP</text>
+
+  <!-- Torso Silhouette -->
+  <path d="M125,270 C125,215 155,210 200,210 C245,210 275,215 275,270 Z" fill="#27272a" stroke="#3f3f46" stroke-width="2"/>
+
+  <!-- Tie/Collar Accent for Executive aesthetic -->
+  <path d="M190,210 L200,245 L210,210 Z" fill="#18181b"/>
+  <path d="M196,242 L200,270 L204,242 Z" fill="#3f3f46"/>
+
+  <!-- Verified Badge -->
+  <circle cx="270" cy="125" r="16" fill="#18181b" stroke="#3f3f46" stroke-width="2"/>
+  <path d="M264,125 L268,129 L277,120" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Name & Founder Tag below -->
+  <text x="200" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#fafafa" text-anchor="middle" letter-spacing="3">MD MASUM PARVEJ</text>
+  <text x="200" y="364" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500" fill="#a1a1aa" text-anchor="middle" letter-spacing="2">FOUNDER &amp; DEVELOPER</text>
+</svg>

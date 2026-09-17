@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merchant Storefront — Zenvy Wear Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <span>Verified Storefront</span> &bull; 100% Genuine Guaranteed &bull; 7-Day Hassle-Free Returns
+      </div>
+      <div style="display: flex; gap: 16px; align-items: center; font-size: 0.78rem;">
+        <a href="/sellers.html" style="color: #fff;"><i class="fas fa-arrow-left"></i> Back to All Stores</a>
+        <a href="/seller-register.html" style="color: #fff; text-decoration: underline;"><i class="fas fa-store"></i> Become a Seller</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header-main" id="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence &bull; Marketplace</span>
+        </a>
+      </div>
+
+      <!-- Categories Mega Menu Trigger -->
+      <div class="categories-megamenu-container" id="categories-megamenu-container">
+        <div class="marketplace-categories-trigger" id="marketplace-categories-trigger">
+          <i class="fas fa-bars"></i>
+          <span>Categories</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="categories-megamenu" id="categories-megamenu"></div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link">Marketplace</a>
+        <a href="/flash-sale.html" class="nav-link" style="color: #ef4444;"><i class="fas fa-bolt"></i> Flash Deals</a>
+        <a href="/sellers.html" class="nav-link active">Stores</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/compare.html" class="nav-action-btn" id="nav-compare-btn" title="Compare">
+          <i class="fas fa-columns"></i>
+          <span class="badge-count" id="nav-compare-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/wishlist.html" class="nav-action-btn" id="nav-wishlist-btn" title="Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/cart.html" class="nav-action-btn" id="nav-cart-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/login.html" class="nav-action-btn nav-account-link" id="nav-account-btn" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Store Container -->
+  <main class="container" style="padding: 32px 24px;">
+    <!-- Store Header Card -->
+    <div class="seller-store-header" id="store-header-card">
+      <div style="padding: 40px; text-align: center;"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+    </div>
+
+    <!-- Store Navigation & Catalog -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+      <div>
+        <h2 style="font-size: 1.4rem; font-weight: 700; margin: 0;">Products by this Merchant</h2>
+        <p id="store-product-count-label" style="font-size: 0.85rem; color: #71717a; margin-top: 2px;">Loading items...</p>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <input type="text" id="store-product-search" placeholder="Search in this store..." style="width: 220px; font-size: 0.85rem; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: #fff;">
+        <select id="store-sort-select" style="padding: 8px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.85rem; background: #fff;">
+          <option value="default">Default Sorting</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="store-products-grid">
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+    </div>
+  </main>
+
+  <footer class="footer-main" style="margin-top: 60px;">
+    <div class="container" style="text-align: center; padding: 30px 0; color: #71717a; font-size: 0.85rem;">
+      &copy; 2026 Zenvy Wear Ltd. All Rights Reserved. Multi-Category Marketplace Bangladesh.
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    let currentStore = null;
+    let storeProducts = [];
+
+    async function loadStorePage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sellerId = urlParams.get('id') || 'seller-zenvy-flagship';
+
+      const res = await apiRequest(`/sellers/${sellerId}`);
+      const wishRes = await apiRequest('/wishlist');
+      const wishIds = (wishRes.ok && wishRes.data && wishRes.data.productIds) ? wishRes.data.productIds : [];
+
+      if (!res.ok || !res.data || !res.data.seller) {
+        document.getElementById('store-header-card').innerHTML = `
+          <div style="padding: 60px; text-align: center;">
+            <h3>Store not found</h3>
+            <p style="color: #71717a;">The requested merchant store could not be loaded.</p>
+            <a href="/sellers.html" class="btn btn-primary" style="margin-top: 16px;">View All Stores</a>
+          </div>
+        `;
+        return;
+      }
+
+      currentStore = res.data.seller;
+      storeProducts = res.data.products || [];
+
+      // Update Page Title
+      document.title = `${currentStore.storeName} — Zenvy Wear Marketplace`;
+
+      // Render Header
+      const header = document.getElementById('store-header-card');
+      header.innerHTML = `
+        <img class="seller-store-banner" src="${currentStore.banner}" alt="${currentStore.storeName}">
+        <div class="seller-store-profile-bar">
+          <div class="seller-store-identity">
+            <img class="seller-store-avatar" src="${currentStore.logo}" alt="${currentStore.storeName}">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <h1 style="font-size: 1.6rem; font-weight: 700; margin: 0;">${currentStore.storeName}</h1>
+                <span class="seller-tag-badge seller-tag-official"><i class="fas fa-check-circle"></i> Official Verified</span>
+              </div>
+              <div style="font-size: 0.85rem; color: #71717a; margin-top: 4px;">
+                <span><i class="fas fa-th-large" style="margin-right: 4px;"></i> ${currentStore.category}</span>
+                <span style="margin: 0 8px;">&bull;</span>
+                <span><i class="fas fa-map-marker-alt" style="margin-right: 4px;"></i> ${currentStore.address}</span>
+              </div>
+              <p style="font-size: 0.85rem; color: #52525b; max-width: 600px; margin-top: 8px; line-height: 1.5;">
+                ${currentStore.description}
+              </p>
+            </div>
+          </div>
+
+          <div class="seller-store-stats">
+            <div class="seller-stat-item">
+              <div class="seller-stat-num" style="color: #f59e0b;">
+                ${currentStore.rating} <i class="fas fa-star" style="font-size: 0.85rem;"></i>
+              </div>
+              <div class="seller-stat-label">Store Rating (${currentStore.ratingCount || 100}+)</div>
+            </div>
+            <div class="seller-stat-item">
+              <div class="seller-stat-num" style="color: #16a34a;">${currentStore.positiveResponseRate}%</div>
+              <div class="seller-stat-label">Positive Feedback</div>
+            </div>
+            <div class="seller-stat-item">
+              <div class="seller-stat-num">${storeProducts.length}</div>
+              <div class="seller-stat-label">Total Products</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Render products
+      document.getElementById('store-product-count-label').textContent = `Showing ${storeProducts.length} verified products`;
+      renderStoreProducts(storeProducts, wishIds);
+
+      // Search & Sorting inside store
+      const searchInput = document.getElementById('store-product-search');
+      const sortSelect = document.getElementById('store-sort-select');
+
+      function filterAndSort() {
+        let items = [...storeProducts];
+        const q = searchInput.value.toLowerCase().trim();
+        if (q) {
+          items = items.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+        }
+
+        const sort = sortSelect.value;
+        if (sort === 'price-low') {
+          items.sort((a, b) => (a.discountPrice || a.price) - (b.discountPrice || b.price));
+        } else if (sort === 'price-high') {
+          items.sort((a, b) => (b.discountPrice || b.price) - (a.discountPrice || a.price));
+        } else if (sort === 'rating') {
+          items.sort((a, b) => b.rating - a.rating);
+        }
+
+        renderStoreProducts(items, wishIds);
+        document.getElementById('store-product-count-label').textContent = `Showing ${items.length} of ${storeProducts.length} products`;
+      }
+
+      searchInput.addEventListener('input', filterAndSort);
+      sortSelect.addEventListener('change', filterAndSort);
+    }
+
+    function renderStoreProducts(products, wishIds) {
+      const grid = document.getElementById('store-products-grid');
+      if (products.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #71717a;">No items found in this store matching your query.</div>`;
+        return;
+      }
+      grid.innerHTML = products.map(p => generateProductCardHTML(p, wishIds.includes(p._id))).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadStorePage);
+  </script>
+</body>
+</html>

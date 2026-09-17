@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Care & Showroom — Zenvy Wear | Wear Your Confidence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link">Shop Collection</a>
+        <a href="/about.html" class="nav-link">About Brand</a>
+        <a href="/contact.html" class="nav-link active">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/wishlist.html" class="nav-action-btn" title="Saved Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/cart.html" class="nav-action-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/login.html" class="nav-action-btn nav-account-link" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+
+        <button class="hamburger-btn" id="hamburger-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <div style="background-color: #f4efe9; padding: 50px 0; border-bottom: 1px solid var(--color-border); text-align: center;">
+    <div class="container">
+      <span class="section-tag">Direct Concierge</span>
+      <h1 style="font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; margin-top: 4px;">Customer Care & Atelier</h1>
+      <p style="color: var(--color-medium-gray); margin-top: 6px;">We are here to assist with sizing advice, custom orders, or delivery support.</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top: 60px; padding-bottom: 80px;">
+    
+    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start;" class="hero-grid">
+      
+      <!-- Contact Info -->
+      <div>
+        <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; margin-bottom: 20px;">Flagship Showroom</h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 20px; font-size: 0.95rem; color: #52525b; line-height: 1.7;">
+          <div style="display: flex; gap: 14px;">
+            <i class="fas fa-map-marker-alt" style="color: #b39268; font-size: 1.2rem; margin-top: 4px;"></i>
+            <div>
+              <strong style="color: #111; display: block;">Banani Atelier</strong>
+              Road 11, Block D, Banani, Dhaka-1213, Bangladesh
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px;">
+            <i class="fas fa-phone-alt" style="color: #b39268; font-size: 1.2rem; margin-top: 4px;"></i>
+            <div>
+              <strong style="color: #111; display: block;">Concierge & WhatsApp Support</strong>
+              +880 1711-234567 (10:00 AM – 9:00 PM Daily)
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px;">
+            <i class="fas fa-envelope" style="color: #b39268; font-size: 1.2rem; margin-top: 4px;"></i>
+            <div>
+              <strong style="color: #111; display: block;">Official Email</strong>
+              care@zenvywear.com / concierge@zenvywear.com
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; background: #fafafa; border: 1px solid var(--color-border); border-radius: 8px; padding: 24px;">
+          <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 10px;">7-Day Doorstep Exchange Policy</h4>
+          <p style="font-size: 0.88rem; color: #71717a; line-height: 1.6;">
+            If any item does not fit your silhouette with absolute confidence, our Dhaka courier delivers your replacement size and collects the return item simultaneously.
+          </p>
+        </div>
+      </div>
+
+      <!-- Message Form -->
+      <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 36px; box-shadow: var(--shadow-sm);">
+        <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;">Send a Message</h3>
+        <p style="font-size: 0.88rem; color: #71717a; margin-bottom: 24px;">Our styling team replies within 2 hours during atelier hours.</p>
+
+        <form onsubmit="handleContactSubmit(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Your Name *</label>
+              <input type="text" required placeholder="Asif Mahmud" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Phone Number *</label>
+              <input type="tel" required placeholder="017XXXXXXXX" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+            </div>
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Inquiry Subject</label>
+            <select style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; background: #fff;">
+              <option>Size & Fit Consultation</option>
+              <option>Exchange / Return Assistance</option>
+              <option>Courier Tracking Inquiry</option>
+              <option>Bulk Corporate / Wedding Capsule</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom: 22px;">
+            <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Your Message</label>
+            <textarea rows="4" required placeholder="Tell us how we can assist you..." style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; resize: vertical;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            Send Inquiry to Concierge
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-copyright-block">
+          <div class="footer-copy-text">&copy; 2026 Zenvy Wear. All Rights Reserved.</div>
+          <div class="footer-dev-text">Designed &amp; Developed by <strong>MD Masum Parvej</strong></div>
+        </div>
+        <div class="payment-icons">
+          <span class="payment-badge">Cash on Delivery</span>
+          <span class="payment-badge" style="background:#e2136e;">bKash</span>
+          <span class="payment-badge" style="background:#f7941d;">Nagad</span>
+          <span class="payment-badge">Visa / Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      showToast('Thank you! Your message was received by our Banani concierge team.', 'success');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

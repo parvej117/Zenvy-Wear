@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenvy Wear — Wear Your Confidence | Premium Fashion Bangladesh</title>
+  <meta name="description" content="Discover premium menswear, luxury womenswear, and contemporary tailored essentials from Zenvy Wear. Crafted in Bangladesh.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Zenvy Wear — Wear Your Confidence">
+  <meta property="og:description" content="Premium luxury fashion brand in Bangladesh. Wear Your Confidence.">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <span>Bangladesh's Multi-Category Marketplace</span> &bull; Free Express Delivery on orders above <span>৳ 5,000</span> &bull; Use code <span>ZENVY10</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: center; font-size: 0.78rem;">
+        <a href="/seller-register.html" style="color: #fff; text-decoration: underline;"><i class="fas fa-store"></i> Become a Seller</a>
+        <a href="/seller-dashboard.html" style="color: #fff;"><i class="fas fa-tachometer-alt"></i> Seller Hub</a>
+        <a href="/orders.html" style="color: #fff;"><i class="fas fa-truck"></i> Track Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header-main" id="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo" id="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence &bull; Marketplace</span>
+        </a>
+      </div>
+
+      <!-- Marketplace Categories Trigger & Mega-Menu -->
+      <div class="categories-megamenu-container" id="categories-megamenu-container">
+        <div class="marketplace-categories-trigger" id="marketplace-categories-trigger">
+          <i class="fas fa-bars"></i>
+          <span>Categories</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+
+        <div class="categories-megamenu" id="categories-megamenu">
+          <!-- Dynamically populated by setupCategoriesMegaMenu in main.js -->
+          <div style="padding: 40px; text-align: center; grid-column: 1 / -1;">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="/shop.html" class="nav-link">Marketplace</a>
+        <a href="/flash-sale.html" class="nav-link" style="color: #ef4444; font-weight: 600;"><i class="fas fa-bolt"></i> Flash Deals</a>
+        <a href="/sellers.html" class="nav-link">Stores</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/contact.html" class="nav-link">Help</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Search -->
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="text" class="nav-search-input" placeholder="Search 17+ categories..." style="width: 200px; font-size: 0.82rem; padding: 7px 14px; border: 1px solid var(--color-border); border-radius: 20px; background: #fff;">
+          <i class="fas fa-search" style="position: absolute; right: 12px; font-size: 0.8rem; color: #a1a1aa; pointer-events: none;"></i>
+        </div>
+
+        <!-- Product Compare -->
+        <a href="/compare.html" class="nav-action-btn" id="nav-compare-btn" title="Product Comparison">
+          <i class="fas fa-columns"></i>
+          <span class="badge-count" id="nav-compare-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- Wishlist -->
+        <a href="/wishlist.html" class="nav-action-btn" id="nav-wishlist-btn" title="Saved Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- Cart -->
+        <a href="/cart.html" class="nav-action-btn" id="nav-cart-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- User Profile / Sign in -->
+        <a href="/login.html" class="nav-action-btn nav-account-link" id="nav-account-btn" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+
+        <!-- Mobile Hamburger -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Open Mobile Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-nav-content">
+      <div class="mobile-nav-header">
+        <span class="brand-logo" style="font-size: 1.3rem;">ZENVY WEAR</span>
+        <button id="mobile-nav-close" style="font-size: 1.2rem;"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="/" class="mobile-nav-link">Home <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/shop.html" class="mobile-nav-link">All Marketplace Items <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/flash-sale.html" class="mobile-nav-link" style="color: #ef4444;"><i class="fas fa-bolt"></i> Flash Sale Deals <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/sellers.html" class="mobile-nav-link">Verified Stores <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/compare.html" class="mobile-nav-link">Product Comparison <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/seller-register.html" class="mobile-nav-link">Become a Seller <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/seller-dashboard.html" class="mobile-nav-link">Seller Hub <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/wishlist.html" class="mobile-nav-link">Wishlist <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/cart.html" class="mobile-nav-link">Shopping Bag <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/orders.html" class="mobile-nav-link">Track Orders <i class="fas fa-chevron-right fa-xs"></i></a>
+        <a href="/admin/login.html" class="mobile-nav-link" style="color: #71717a; font-size: 0.9rem;">Admin Portal <i class="fas fa-lock fa-xs"></i></a>
+      </div>
+      <div class="mobile-nav-footer">
+        <a href="/login.html" class="btn btn-primary" style="width: 100%;">Sign In / Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="hero-tag">SS'26 Contemporary Capsule</span>
+          <h1 class="hero-title">Wear Your Confidence.</h1>
+          <h2 class="hero-subtitle">Elegance in Every Thread.</h2>
+          <p class="hero-desc">
+            Redefining modern luxury in Bangladesh. Tailored silhouettes, master-grade natural fabrics, and uncompromising attention to craft.
+          </p>
+          <div class="hero-buttons">
+            <a href="/shop.html" class="btn btn-primary btn-lg" id="hero-cta-shop">
+              Shop The Capsule <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 6px;"></i>
+            </a>
+            <a href="/about.html" class="btn btn-secondary btn-lg">
+              Our Craft Story
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200&auto=format&fit=crop" alt="Zenvy Wear Luxury Fashion Campaign">
+          <div class="hero-badge-overlay">
+            <span class="badge-title">Handcrafted In Dhaka</span>
+            <div class="badge-value">Pure Cotton & Silk Blends</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flash Sale Section -->
+  <section class="products-section" id="flash-sale-section" style="background: #fafafa; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 48px 0;">
+    <div class="container">
+      <div class="flash-sale-banner">
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <div class="flash-sale-badge-icon">
+            <i class="fas fa-bolt"></i> Flash Sale
+          </div>
+          <div>
+            <h3 style="font-size: 1.4rem; font-weight: 700; margin: 0; color: #fff;">Limited-Time Marketplace Deals</h3>
+            <p style="color: #a1a1aa; font-size: 0.85rem; margin: 2px 0 0;">Exclusive markdowns up to 50% across electronics, fashion, and living.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="text-align: right;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #a1a1aa; margin-bottom: 4px;">Deals End In:</div>
+            <div id="flash-countdown">
+              <!-- Loaded via startFlashSaleTimer -->
+            </div>
+          </div>
+          <a href="/flash-sale.html" class="btn btn-sm" style="background: #ef4444; color: #fff; font-weight: 600; padding: 10px 18px; border-radius: 4px;">
+            View All Deals <i class="fas fa-arrow-right" style="font-size: 0.75rem; margin-left: 4px;"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-grid" id="home-flash-sales-grid">
+        <!-- Injected via loadHomeContent() -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+          <i class="fas fa-spinner fa-spin fa-2x"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section: 17 Categories Grid -->
+  <section class="categories-section" id="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Marketplace Departments</span>
+        <h2>Explore 17 Categories</h2>
+        <p>From cutting-edge electronics and computing to luxury fashion and home essentials.</p>
+      </div>
+
+      <div class="category-grid" id="home-categories-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;">
+        <!-- Injected via products.js -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+          <i class="fas fa-spinner fa-spin fa-2x"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verified Marketplace Stores Section -->
+  <section class="sellers-section" id="sellers-section" style="background: #ffffff; padding: 60px 0; border-top: 1px solid #eee;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="section-tag">Direct From Brand Ateliers</span>
+          <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; margin: 4px 0 0;">Verified Marketplace Stores</h2>
+          <p style="color: #71717a; margin-top: 4px;">Shop directly from certified manufacturers, official brand flagships, and vetted sellers.</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="/seller-register.html" class="btn btn-secondary btn-sm"><i class="fas fa-store"></i> Register Your Store</a>
+          <a href="/sellers.html" class="btn btn-primary btn-sm">All Stores <i class="fas fa-arrow-right" style="font-size: 0.75rem; margin-left: 4px;"></i></a>
+        </div>
+      </div>
+
+      <div class="sellers-grid" id="home-sellers-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+        <!-- Injected dynamically via loadHomeContent() -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+          <i class="fas fa-spinner fa-spin fa-2x"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trending Marketplace Drops -->
+  <section class="products-section" id="products-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Marketplace Spotlight</span>
+        <h2>Trending Multi-Category Products</h2>
+        <p>Curated highest-rated products across top brands and verified sellers.</p>
+      </div>
+
+      <div class="product-grid" id="home-new-arrivals-grid">
+        <!-- Injected dynamically via loadHomeContent() -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px;">
+          <i class="fas fa-spinner fa-spin fa-2x"></i>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="/shop.html" class="btn btn-secondary btn-lg">
+          Explore All Products <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 8px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Manifesto -->
+  <section class="manifesto-section" id="manifesto-section">
+    <div class="container">
+      <span class="manifesto-tag">The Zenvy Ethos</span>
+      <h3 class="manifesto-title">
+        "Fashion is not merely what you put on. It is the armor through which you <em>Wear Your Confidence</em> each day."
+      </h3>
+      <p style="color: #a1a1aa; max-width: 650px; margin: 0 auto; line-height: 1.8;">
+        Born in Dhaka, Zenvy Wear bridges minimalist Scandinavian silhouettes with Bengal's centuries of textile heritage. We believe in intentional design, timeless durability, and ethical production.
+      </p>
+
+      <div class="manifesto-features">
+        <div class="manifesto-item">
+          <i class="fas fa-gem"></i>
+          <h4>Master Fabric Selection</h4>
+          <p>Long-staple Egyptian cotton, pure organic linen, and custom heavy French terry.</p>
+        </div>
+        <div class="manifesto-item">
+          <i class="fas fa-shipping-fast"></i>
+          <h4>Express Delivery</h4>
+          <p>24-hour priority dispatch across Dhaka, and 48-72 hours nationwide across all 64 districts.</p>
+        </div>
+        <div class="manifesto-item">
+          <i class="fas fa-undo-alt"></i>
+          <h4>Hassle-Free Exchange</h4>
+          <p>7-day complimentary doorstep size exchange without awkward questions.</p>
+        </div>
+        <div class="manifesto-item">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Verified Secure Payments</h4>
+          <p>Cash on delivery, instant bKash / Nagad verification, and secured Visa/Mastercard checkout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section" id="newsletter-section">
+    <div class="container">
+      <span class="section-tag">Join The Circle</span>
+      <h3 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 600;">Receive 10% Off Your First Order</h3>
+      <p style="color: var(--color-medium-gray); margin-top: 8px;">
+        Subscribe to gain private access to limited drops, runway previews, and styling sessions.
+      </p>
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" placeholder="Enter your personal email..." required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Developer / Founder Profile Section -->
+  <section class="founder-section" id="founder-section">
+    <div class="container">
+      <div class="founder-card">
+        <!-- Profile Photo Area with interactive upload & clear file guidance -->
+        <div class="founder-photo-wrapper">
+          <div class="founder-photo-ring">
+            <img 
+              id="founder-profile-img" 
+              src="assets/images/masum-parvej.jpg" 
+              alt="MD Masum Parvej" 
+              class="founder-photo"
+              onerror="this.onerror=null; this.src='/assets/images/avatar-placeholder.svg';"
+            >
+            <label for="founder-photo-upload" class="founder-upload-trigger" title="Upload your photo (saves to assets/images/masum-parvej.jpg)">
+              <i class="fas fa-camera"></i>
+            </label>
+            <input type="file" id="founder-photo-upload" accept="image/*" style="display: none;">
+          </div>
+          <div class="founder-photo-path-badge" title="Save your photo here to auto-display">
+            <i class="fas fa-folder-open"></i> <code>assets/images/masum-parvej.jpg</code>
+          </div>
+        </div>
+
+        <!-- Founder Bio & Details -->
+        <div class="founder-info">
+          <div class="founder-eyebrow">
+            <i class="fas fa-circle"></i> Founder &amp; Lead Architect
+          </div>
+          <h2 class="founder-name">MD Masum Parvej</h2>
+          <div class="founder-role">
+            Founder &amp; Developer &mdash; Zenvy Wear
+          </div>
+          <p class="founder-description">
+            “Designed and developed with passion to create a modern, reliable and user-friendly online marketplace experience.”
+          </p>
+
+          <!-- Social / Contact Icons -->
+          <div class="founder-socials">
+            <a href="https://www.facebook.com/share/1DXfwVAqNd/" target="_blank" rel="noopener noreferrer" class="founder-social-link social-facebook" title="Facebook Profile">
+              <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://github.com/parvej117" target="_blank" rel="noopener noreferrer" class="founder-social-link social-github" title="GitHub Profile (@parvej117)">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/md-masum-parvej-7091343b4" target="_blank" rel="noopener noreferrer" class="founder-social-link social-linkedin" title="LinkedIn Profile">
+              <i class="fab fa-linkedin-in"></i> LinkedIn
+            </a>
+            <a href="mailto:masumparvej117@gmail.com" class="founder-social-link social-email" title="Email MD Masum Parvej">
+              <i class="fas fa-envelope"></i> Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-main" id="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand-logo" style="font-size: 1.5rem;">ZENVY WEAR</span>
+          <p>
+            Wear Your Confidence. Contemporary luxury apparel engineered for modern tastemakers in Bangladesh and beyond.
+          </p>
+          <div style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.7;">
+            <div><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Flagship Atelier: Road 11, Block D, Banani, Dhaka-1213</div>
+            <div style="margin-top: 6px;"><i class="fas fa-phone-alt" style="margin-right: 8px;"></i> Concierge: +880 1711-234567</div>
+            <div style="margin-top: 6px;"><i class="fas fa-envelope" style="margin-right: 8px;"></i> care@zenvywear.com</div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Shop Categories</h5>
+          <ul class="footer-links">
+            <li><a href="/shop.html?category=Casual+Shirts">Casual Shirts</a></li>
+            <li><a href="/shop.html?category=Formal+Blazers">Formal Blazers</a></li>
+            <li><a href="/shop.html?category=Tees+%26+Polos">Tees & Polos</a></li>
+            <li><a href="/shop.html?category=Trousers+%26+Chinos">Trousers & Chinos</a></li>
+            <li><a href="/shop.html?category=Outerwear">Outerwear & Jackets</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Customer Care</h5>
+          <ul class="footer-links">
+            <li><a href="/orders.html">Track My Order</a></li>
+            <li><a href="/contact.html">Shipping & Delivery Rates</a></li>
+            <li><a href="/contact.html">7-Day Exchange Policy</a></li>
+            <li><a href="/about.html">Sustainability Statement</a></li>
+            <li><a href="/admin/login.html">Staff & Admin Login</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Showroom Hours</h5>
+          <p style="font-size: 0.88rem; margin-bottom: 16px;">
+            Saturday – Thursday: 10:00 AM – 9:00 PM<br>
+            Friday: 2:00 PM – 9:30 PM
+          </p>
+          <div style="display: flex; gap: 12px; margin-top: 14px;">
+            <a href="#" class="btn-icon" style="background:#222; color:#fff;" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/share/1DXfwVAqNd/" target="_blank" rel="noopener noreferrer" class="btn-icon" style="background:#222; color:#fff;" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="btn-icon" style="background:#222; color:#fff;" title="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright-block">
+          <div class="footer-copy-text">&copy; 2026 Zenvy Wear. All Rights Reserved.</div>
+          <div class="footer-dev-text">Designed &amp; Developed by <strong>MD Masum Parvej</strong></div>
+        </div>
+        <div class="payment-icons">
+          <span class="payment-badge"><i class="fas fa-money-bill-wave"></i> Cash On Delivery</span>
+          <span class="payment-badge" style="background: #e2136e;">bKash</span>
+          <span class="payment-badge" style="background: #f7941d;">Nagad</span>
+          <span class="payment-badge"><i class="fab fa-cc-visa"></i> Visa</span>
+          <span class="payment-badge"><i class="fab fa-cc-mastercard"></i> Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+  <script src="/js/products.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHomeContent();
+    });
+  </script>
+</body>
+</html>

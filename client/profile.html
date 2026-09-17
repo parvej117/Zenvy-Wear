@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — Zenvy Wear | Wear Your Confidence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link">Shop Collection</a>
+        <a href="/about.html" class="nav-link">About Brand</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/wishlist.html" class="nav-action-btn" title="Saved Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/cart.html" class="nav-action-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <button class="btn btn-secondary btn-sm" onclick="logoutUser()">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <div style="background-color: #f4efe9; padding: 40px 0; border-bottom: 1px solid var(--color-border);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+      <div>
+        <span class="section-tag">Member Portal</span>
+        <h1 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; margin-top: 4px;">Hello, <span id="profile-display-name">Customer</span></h1>
+        <p style="color: var(--color-medium-gray); font-size: 0.9rem;" id="profile-display-email">customer@domain.com</p>
+      </div>
+      <div>
+        <a href="/shop.html" class="btn btn-primary btn-sm">Explore New Drops</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top: 48px; padding-bottom: 80px;">
+    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start;" class="shop-layout">
+      
+      <!-- Account Sidebar -->
+      <aside style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 20px; box-shadow: var(--shadow-sm);">
+        <nav style="display: flex; flex-direction: column; gap: 4px;">
+          <a href="#tab-orders" class="admin-nav-item active" style="color: #111; background: #f4f4f5;">
+            <i class="fas fa-box-open"></i> My Orders
+          </a>
+          <a href="#tab-details" class="admin-nav-item" style="color: #71717a;">
+            <i class="fas fa-user-edit"></i> Profile Details
+          </a>
+          <a href="#tab-security" class="admin-nav-item" style="color: #71717a;">
+            <i class="fas fa-lock"></i> Security & Password
+          </a>
+          <button onclick="logoutUser()" class="admin-nav-item" style="color: #dc2626; border: none; text-align: left; width: 100%; cursor: pointer;">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Main Account Area -->
+      <main>
+        
+        <!-- Orders Section -->
+        <section id="tab-orders" style="margin-bottom: 40px;">
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 18px;">Order History & Tracking</h3>
+          <div id="profile-orders-list">
+            <div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading orders...</div>
+          </div>
+        </section>
+
+        <!-- Edit Profile Form -->
+        <section id="tab-details" style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 28px; margin-bottom: 32px; box-shadow: var(--shadow-sm);">
+          <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 18px;">Personal Information</h3>
+          
+          <form onsubmit="handleProfileUpdate(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Full Name</label>
+                <input type="text" id="edit-profile-name" required style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Phone Number</label>
+                <input type="tel" id="edit-profile-phone" required style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Save Profile Changes</button>
+          </form>
+        </section>
+
+        <!-- Change Password Form -->
+        <section id="tab-security" style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 28px; box-shadow: var(--shadow-sm);">
+          <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 18px;">Change Password</h3>
+
+          <form onsubmit="handleChangePassword(event)">
+            <div style="margin-bottom: 16px;">
+              <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Current Password</label>
+              <input type="password" id="pwd-current" required placeholder="••••••••" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">New Password</label>
+                <input type="password" id="pwd-new" required placeholder="Min. 6 chars" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Confirm New Password</label>
+                <input type="password" id="pwd-confirm" required placeholder="Re-type new password" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-sm">Update Password</button>
+          </form>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProfileDashboard();
+    });
+  </script>
+</body>
+</html>

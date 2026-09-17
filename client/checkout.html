@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Zenvy Wear | Wear Your Confidence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    .payment-method-card {
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+    .payment-method-card:hover {
+      border-color: #111;
+    }
+    .payment-method-card.selected {
+      border-color: #111;
+      background: #fafafa;
+      box-shadow: 0 0 0 1px #111;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence</span>
+        </a>
+      </div>
+      <div style="font-size: 0.85rem; color: #71717a; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-lock" style="color: #16a34a;"></i> 256-Bit Encrypted Secure Checkout
+      </div>
+    </div>
+  </header>
+
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    
+    <!-- Success View (Hidden initially) -->
+    <div id="checkout-success-view" style="display: none; max-width: 650px; margin: 0 auto; text-align: center; background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 48px 32px; box-shadow: var(--shadow-md);">
+      <div style="width: 70px; height: 70px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px;">
+        <i class="fas fa-check"></i>
+      </div>
+      <span class="section-tag" style="color: #16a34a;">Order Confirmed</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 8px;">Thank You for Your Order!</h2>
+      <p style="color: #71717a; margin-bottom: 24px;">Your order has been registered in our Dhaka atelier and is being prepared for dispatch.</p>
+
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 20px; text-align: left; margin-bottom: 30px; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: #64748b;">Order Number:</span>
+          <strong id="success-order-number" style="color: #111;"></strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: #64748b;">Tracking ID:</span>
+          <strong id="success-order-tracking" style="color: #111;"></strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: #64748b;">Payment Method:</span>
+          <strong id="success-order-payment" style="color: #111;"></strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: #64748b;">Total Amount:</span>
+          <strong id="success-order-total" style="color: #111; font-size: 1.1rem;"></strong>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; justify-content: center;">
+        <a href="/orders.html" class="btn btn-primary">Track My Orders</a>
+        <a href="/shop.html" class="btn btn-secondary">Continue Shopping</a>
+      </div>
+    </div>
+
+    <!-- Main Checkout Form Layout -->
+    <div id="checkout-form-container" class="checkout-grid" style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start;">
+      
+      <!-- Left Column: Shipping & Payment -->
+      <div>
+        <form id="checkout-form" onsubmit="placeOrder(event)">
+          <!-- Shipping Address -->
+          <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 20px;">
+              1. Delivery Address
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Full Name *</label>
+                <input type="text" id="checkout-name" required placeholder="e.g. Asif Mahmud" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Phone Number (Active) *</label>
+                <input type="tel" id="checkout-phone" required placeholder="017XXXXXXXX" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+              </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Email Address *</label>
+              <input type="email" id="checkout-email" required placeholder="name@domain.com" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Delivery Zone *</label>
+                <select id="checkout-delivery-zone" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; background: #fff;">
+                  <option value="Dhaka">Inside Dhaka (৳80 • 24-48 Hours)</option>
+                  <option value="Outside Dhaka">Outside Dhaka / Nationwide (৳130 • 48-72 Hours)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Postal Code</label>
+                <input type="text" id="checkout-postal" placeholder="e.g. 1213" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+              </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Street Address (House, Road, Area) *</label>
+              <textarea id="checkout-address" required rows="2" placeholder="House 42, Road 11, Block D, Banani" style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; resize: vertical;"></textarea>
+            </div>
+
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 6px;">Order Notes (Optional)</label>
+              <input type="text" id="checkout-notes" placeholder="Special delivery instructions, gate code, preferred time..." style="width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem;">
+            </div>
+          </div>
+
+          <!-- Payment Method -->
+          <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 28px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 20px;">
+              2. Payment Method
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+              <!-- Cash on Delivery -->
+              <div class="payment-method-card selected" data-method="Cash on Delivery">
+                <i class="fas fa-money-bill-wave" style="font-size: 1.3rem; color: #16a34a; width: 30px;"></i>
+                <div style="flex: 1;">
+                  <strong style="display: block; font-size: 0.95rem;">Cash on Delivery (COD)</strong>
+                  <span style="font-size: 0.8rem; color: #71717a;">Pay with physical cash upon receiving your parcel at your doorstep.</span>
+                </div>
+              </div>
+
+              <!-- bKash -->
+              <div class="payment-method-card" data-method="bKash">
+                <div style="background: #e2136e; color: #fff; font-weight: 700; font-size: 0.85rem; padding: 4px 8px; border-radius: 4px;">bKash</div>
+                <div style="flex: 1;">
+                  <strong style="display: block; font-size: 0.95rem;">bKash Instant Mobile Payment</strong>
+                  <span style="font-size: 0.8rem; color: #71717a;">Pay securely via bKash Merchant Account</span>
+                </div>
+              </div>
+
+              <!-- Nagad -->
+              <div class="payment-method-card" data-method="Nagad">
+                <div style="background: #f7941d; color: #fff; font-weight: 700; font-size: 0.85rem; padding: 4px 8px; border-radius: 4px;">Nagad</div>
+                <div style="flex: 1;">
+                  <strong style="display: block; font-size: 0.95rem;">Nagad Instant Mobile Payment</strong>
+                  <span style="font-size: 0.8rem; color: #71717a;">Pay easily with Nagad wallet</span>
+                </div>
+              </div>
+
+              <!-- Card -->
+              <div class="payment-method-card" data-method="Credit/Debit Card">
+                <div style="display: flex; gap: 6px; font-size: 1.2rem; color: #2563eb;">
+                  <i class="fab fa-cc-visa"></i>
+                  <i class="fab fa-cc-mastercard"></i>
+                </div>
+                <div style="flex: 1;">
+                  <strong style="display: block; font-size: 0.95rem;">Credit or Debit Card</strong>
+                  <span style="font-size: 0.8rem; color: #71717a;">Visa, MasterCard, American Express, UnionPay</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- bKash / Nagad instructions box -->
+            <div id="bkash-instructions" style="display: none; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; padding: 16px; margin-bottom: 20px; font-size: 0.85rem; color: #9f1239;">
+              <p><strong>Merchant Payment Instructions:</strong></p>
+              <ol style="margin-left: 18px; margin-top: 6px; line-height: 1.6;">
+                <li>Open your bKash/Nagad app and choose <strong>"Make Payment"</strong></li>
+                <li>Enter Merchant Account Number: <strong>01711-234567</strong></li>
+                <li>Enter Amount matching the Order Total</li>
+                <li>Enter Reference: <strong>ZENVY</strong> and complete PIN</li>
+              </ol>
+            </div>
+
+            <!-- Card instructions box -->
+            <div id="card-instructions" style="display: none; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 16px; margin-bottom: 20px; font-size: 0.85rem; color: #166534;">
+              <p><i class="fas fa-shield-alt"></i> Card payments are processed securely through SSLCommerz gateway with 3D Secure OTP verification.</p>
+            </div>
+
+            <button type="submit" id="place-order-btn" class="btn btn-primary btn-lg" style="width: 100%;">
+              Complete Order & Pay
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right Column: Order Items & Pricing -->
+      <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 8px; padding: 28px; box-shadow: var(--shadow-sm); position: sticky; top: 100px;">
+        <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #eee;">
+          Review Your Order
+        </h3>
+
+        <!-- Items list -->
+        <div id="checkout-items-list" style="max-height: 320px; overflow-y: auto; margin-bottom: 20px; padding-right: 4px;">
+          <!-- Loaded via checkout.js -->
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 16px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #71717a;">Subtotal</span>
+            <span id="checkout-subtotal-val" style="font-weight: 600;">৳ 0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #71717a;">Promo Discount</span>
+            <span id="checkout-discount-val" style="font-weight: 600; color: #16a34a;">৳ 0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #71717a;">Delivery Fee</span>
+            <span id="checkout-shipping-val" style="font-weight: 600;">৳ 80</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; color: #111; border-top: 1px solid #eee; padding-top: 16px; margin-top: 6px;">
+            <span>Grand Total</span>
+            <span id="checkout-grand-total">৳ 0</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #eee; font-size: 0.78rem; color: #71717a; text-align: center;">
+          <i class="fas fa-lock" style="margin-right: 6px;"></i> All orders backed by 7-day complimentary doorstep exchange.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/checkout.js"></script>
+</body>
+</html>

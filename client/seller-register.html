@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Registration — Sell on Zenvy Wear Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <span>Grow Your Business Across Bangladesh with Zenvy Marketplace</span>
+      </div>
+      <div>
+        <a href="/seller-dashboard.html" style="color: #fff;"><i class="fas fa-tachometer-alt"></i> Existing Seller? Go to Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header-main" id="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence &bull; Marketplace</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link">Marketplace</a>
+        <a href="/sellers.html" class="nav-link">Stores Directory</a>
+        <a href="/seller-dashboard.html" class="nav-link">Seller Hub</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/cart.html" class="nav-action-btn" id="nav-cart-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+        <a href="/login.html" class="nav-action-btn nav-account-link" id="nav-account-btn" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Onboarding Form -->
+  <main class="container" style="max-width: 800px; padding: 48px 24px;">
+    <div style="text-align: center; margin-bottom: 36px;">
+      <span class="section-tag">Merchant Partnerships</span>
+      <h1 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; margin: 4px 0 10px;">Become a Verified Seller</h1>
+      <p style="color: #71717a; max-width: 580px; margin: 0 auto; line-height: 1.6;">
+        Reach thousands of daily buyers across Bangladesh. Benefit from integrated nationwide logistics, automated multi-seller packaging, and express payouts.
+      </p>
+    </div>
+
+    <!-- Registration Card -->
+    <div style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 36px; box-shadow: var(--shadow-sm);">
+      <form id="seller-reg-form">
+        <h3 style="font-size: 1.1rem; font-weight: 700; border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 24px;">
+          <i class="fas fa-store" style="margin-right: 8px;"></i> Store Information
+        </h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Store / Brand Name *</label>
+            <input type="text" name="storeName" required placeholder="e.g. NextGen Audio Hub BD" style="width: 100%; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.9rem;">
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Primary Category *</label>
+            <select name="category" id="seller-category-select" required style="width: 100%; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.9rem; background: #fff;">
+              <option value="Electronics">Electronics</option>
+              <option value="Mobile & Accessories">Mobile & Accessories</option>
+              <option value="Computers & Laptops">Computers & Laptops</option>
+              <option value="Men's Fashion">Men's Fashion</option>
+              <option value="Women's Fashion">Women's Fashion</option>
+              <option value="Kids & Baby">Kids & Baby</option>
+              <option value="Shoes & Bags">Shoes & Bags</option>
+              <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+              <option value="Home & Living">Home & Living</option>
+              <option value="Kitchen & Appliances">Kitchen & Appliances</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Sports & Fitness">Sports & Fitness</option>
+              <option value="Automotive">Automotive</option>
+              <option value="Books & Stationery">Books & Stationery</option>
+              <option value="Jewelry & Accessories">Jewelry & Accessories</option>
+              <option value="Gadgets">Gadgets</option>
+              <option value="Industrial Products">Industrial Products</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Contact Phone *</label>
+            <input type="tel" name="phone" required placeholder="017XXXXXXXX" style="width: 100%; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.9rem;">
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Contact Email</label>
+            <input type="email" name="email" placeholder="merchant@business.com" style="width: 100%; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.9rem;">
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Trade License / Tax ID (Optional for fast approval)</label>
+          <input type="text" name="tradeLicense" placeholder="e.g. TRAD/DNCC/104928" style="width: 100%; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.9rem;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Warehouse / Dispatch Address *</label>
+          <input type="text" name="address" required placeholder="e.g. House 14, Road 4, Sector 7, Uttara, Dhaka" style="width: 100%; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.9rem;">
+        </div>
+
+        <div style="margin-bottom: 28px;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Store Description & Specialization</label>
+          <textarea name="description" rows="3" placeholder="Describe your product lines, warranty terms, and brand philosophy..." style="width: 100%; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.9rem;"></textarea>
+        </div>
+
+        <button type="submit" id="submit-seller-btn" class="btn btn-primary btn-lg" style="width: 100%;">
+          Complete Seller Registration & Open Dashboard <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer-main" style="margin-top: 60px;">
+    <div class="container" style="text-align: center; padding: 30px 0; color: #71717a; font-size: 0.85rem;">
+      &copy; 2026 Zenvy Wear Ltd. All Rights Reserved. Multi-Category Marketplace Bangladesh.
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById('seller-reg-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('submit-seller-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      const res = await apiRequest('/sellers/register', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok && res.data.seller) {
+        showToast('Store registered and approved successfully!', 'success');
+        setTimeout(() => {
+          window.location.href = `/seller-dashboard.html?sellerId=${res.data.seller._id}`;
+        }, 1200);
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = 'Complete Seller Registration & Open Dashboard <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>';
+        showToast(res.data.message || 'Registration failed', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

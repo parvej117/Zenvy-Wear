@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews Moderation — Zenvy Wear Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <span class="brand-title">ZENVY WEAR</span>
+        <span class="badge-admin">ATELIER</span>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="/admin/dashboard.html" class="admin-nav-item">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/admin/products.html" class="admin-nav-item">
+          <i class="fas fa-tshirt"></i> Products Inventory
+        </a>
+        <a href="/admin/orders.html" class="admin-nav-item">
+          <i class="fas fa-shopping-bag"></i> Customer Orders
+        </a>
+        <a href="/admin/users.html" class="admin-nav-item">
+          <i class="fas fa-users"></i> Registered Users
+        </a>
+        <a href="/admin/reviews.html" class="admin-nav-item active">
+          <i class="fas fa-star"></i> Reviews Moderation
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="/" target="_blank" class="admin-nav-item" style="color: #c2a684;">
+          <i class="fas fa-external-link-alt"></i> View Storefront
+        </a>
+        <button onclick="logoutUser()" class="admin-nav-item" style="color: #f87171; background: none; border: none; width: 100%; cursor: pointer;">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div class="admin-topbar-title">
+          <h3>Customer Reviews Moderation</h3>
+        </div>
+      </div>
+
+      <div class="admin-content-body">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h4>Verified Customer Reviews</h4>
+            <span style="font-size: 0.82rem; color: #71717a;">Approve or moderate customer feedback</span>
+          </div>
+
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Reviewer</th>
+                  <th>Rating</th>
+                  <th>Review Content</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin-reviews-table-body">
+                <tr><td colspan="7" style="text-align:center; padding:30px;"><i class="fas fa-spinner fa-spin"></i> Loading reviews...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    async function loadAdminReviews() {
+      if (!verifyAdminAuth()) return;
+      const res = await apiRequest('/admin/reviews');
+      const tbody = document.getElementById('admin-reviews-table-body');
+      
+      if (!res.ok || !res.data.reviews || res.data.reviews.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px;">No customer reviews submitted yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = res.data.reviews.map(r => `
+        <tr>
+          <td><strong>${r.productName || 'Apparel'}</strong></td>
+          <td>${r.userName}</td>
+          <td><span style="color:#eab308;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span></td>
+          <td style="max-width: 250px; font-size: 0.85rem;">"${r.comment}"</td>
+          <td style="font-size: 0.82rem;">${new Date(r.createdAt).toLocaleDateString()}</td>
+          <td><span class="status-pill status-delivered">Approved</span></td>
+          <td>
+            <button class="action-btn delete" onclick="deleteReview('${r._id}')" title="Delete Review">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function deleteReview(id) {
+      if (!confirm('Are you sure you want to remove this review?')) return;
+      const res = await apiRequest(`/admin/reviews/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast('Review removed', 'info');
+        loadAdminReviews();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadAdminReviews);
+  </script>
+</body>
+</html>

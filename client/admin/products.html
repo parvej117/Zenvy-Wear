@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products Inventory — Zenvy Wear Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <span class="brand-title">ZENVY WEAR</span>
+        <span class="badge-admin">ATELIER</span>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="/admin/dashboard.html" class="admin-nav-item">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/admin/products.html" class="admin-nav-item active">
+          <i class="fas fa-tshirt"></i> Products Inventory
+        </a>
+        <a href="/admin/orders.html" class="admin-nav-item">
+          <i class="fas fa-shopping-bag"></i> Customer Orders
+        </a>
+        <a href="/admin/users.html" class="admin-nav-item">
+          <i class="fas fa-users"></i> Registered Users
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="/" target="_blank" class="admin-nav-item" style="color: #c2a684;">
+          <i class="fas fa-external-link-alt"></i> View Storefront
+        </a>
+        <button onclick="logoutUser()" class="admin-nav-item" style="color: #f87171; background: none; border: none; width: 100%; cursor: pointer;">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div class="admin-topbar-title">
+          <h3>Products & Inventory Management</h3>
+        </div>
+        <div>
+          <button class="btn btn-primary btn-sm" onclick="openAddProductModal()">
+            <i class="fas fa-plus"></i> Add New Product
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-content-body">
+        
+        <div class="admin-card">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name / SKU</th>
+                  <th>Category</th>
+                  <th>Price (BDT)</th>
+                  <th>Stock</th>
+                  <th>Rating</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table-body">
+                <tr><td colspan="7" style="text-align:center; padding:30px;"><i class="fas fa-spinner fa-spin"></i> Loading inventory...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Add / Edit Product Modal -->
+  <div class="modal-backdrop" id="product-modal">
+    <div class="modal-dialog" style="max-width: 720px; padding: 32px;">
+      <button class="modal-close-btn" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+      
+      <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 20px;" id="product-modal-title">Add New Product</h3>
+
+      <form id="product-form" onsubmit="handleProductFormSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>Product Name *</label>
+            <input type="text" id="form-prod-name" required class="form-control" placeholder="e.g. Signature Cotton Oxford Shirt">
+          </div>
+
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="form-prod-category" required class="form-control">
+              <option value="Casual Shirts">Casual Shirts</option>
+              <option value="Formal Blazers">Formal Blazers</option>
+              <option value="Tees & Polos">Tees & Polos</option>
+              <option value="Trousers & Chinos">Trousers & Chinos</option>
+              <option value="Outerwear">Outerwear & Jackets</option>
+              <option value="Dresses">Dresses & Gowns</option>
+              <option value="Knitwear">Knitwear Sweaters</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Department / Gender *</label>
+            <select id="form-prod-gender" required class="form-control">
+              <option value="Men">Men</option>
+              <option value="Women">Women</option>
+              <option value="Unisex">Unisex</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Regular Price (BDT ৳) *</label>
+            <input type="number" id="form-prod-price" required min="100" class="form-control" placeholder="2800">
+          </div>
+
+          <div class="form-group">
+            <label>Discounted Price (BDT ৳)</label>
+            <input type="number" id="form-prod-discount-price" min="100" class="form-control" placeholder="Leave empty if no discount">
+          </div>
+
+          <div class="form-group">
+            <label>Inventory Stock Units *</label>
+            <input type="number" id="form-prod-stock" required min="0" class="form-control" placeholder="25">
+          </div>
+
+          <div class="form-group">
+            <label>Available Sizes (comma-separated)</label>
+            <input type="text" id="form-prod-sizes" class="form-control" placeholder="S, M, L, XL, XXL">
+          </div>
+
+          <div class="form-group full-width">
+            <label>Available Colors (comma-separated)</label>
+            <input type="text" id="form-prod-colors" class="form-control" placeholder="Onyx Black, Deep Navy, Warm Beige">
+          </div>
+
+          <div class="form-group full-width">
+            <label>Image URLs (comma-separated, min 1 required) *</label>
+            <input type="text" id="form-prod-images" required class="form-control" placeholder="https://images.unsplash.com/..., https://images.unsplash.com/...">
+          </div>
+
+          <div class="form-group full-width">
+            <label>Product Description & Fabric Details *</label>
+            <textarea id="form-prod-desc" required rows="3" class="form-control" placeholder="Detailed cut, fabric composition, yarn count, and care instructions..."></textarea>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAdminProducts();
+    });
+  </script>
+</body>
+</html>

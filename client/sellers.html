@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace Stores Directory — Zenvy Wear</title>
+  <meta name="description" content="Discover verified brand flagships, boutique ateliers, and independent merchants on Zenvy Wear Marketplace.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <span>Zenvy Marketplace Merchant Network</span> &bull; 100% Genuine Guaranteed
+      </div>
+      <div style="display: flex; gap: 16px; align-items: center; font-size: 0.78rem;">
+        <a href="/seller-register.html" style="color: #fff; text-decoration: underline;"><i class="fas fa-store"></i> Register As A Seller</a>
+        <a href="/seller-dashboard.html" style="color: #fff;"><i class="fas fa-tachometer-alt"></i> Seller Hub</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="header-main" id="header-main">
+    <div class="container navbar">
+      <div class="nav-brand">
+        <a href="/" class="brand-logo">
+          ZENVY WEAR
+          <span class="brand-tagline-micro">Wear Your Confidence &bull; Marketplace</span>
+        </a>
+      </div>
+
+      <!-- Categories Mega Menu Trigger -->
+      <div class="categories-megamenu-container" id="categories-megamenu-container">
+        <div class="marketplace-categories-trigger" id="marketplace-categories-trigger">
+          <i class="fas fa-bars"></i>
+          <span>Categories</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="categories-megamenu" id="categories-megamenu"></div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/shop.html" class="nav-link">Marketplace</a>
+        <a href="/flash-sale.html" class="nav-link" style="color: #ef4444;"><i class="fas fa-bolt"></i> Flash Deals</a>
+        <a href="/sellers.html" class="nav-link active">Stores</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/contact.html" class="nav-link">Help</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="text" id="seller-search-input" placeholder="Search stores..." style="width: 180px; font-size: 0.82rem; padding: 7px 14px; border: 1px solid var(--color-border); border-radius: 20px; background: #fff;">
+          <i class="fas fa-search" style="position: absolute; right: 12px; font-size: 0.8rem; color: #a1a1aa; pointer-events: none;"></i>
+        </div>
+
+        <a href="/compare.html" class="nav-action-btn" id="nav-compare-btn" title="Compare">
+          <i class="fas fa-columns"></i>
+          <span class="badge-count" id="nav-compare-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/wishlist.html" class="nav-action-btn" id="nav-wishlist-btn" title="Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="badge-count" id="nav-wishlist-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/cart.html" class="nav-action-btn" id="nav-cart-btn" title="Shopping Bag">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge-count" id="nav-cart-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="/login.html" class="nav-action-btn nav-account-link" id="nav-account-btn" title="Account">
+          <i class="far fa-user"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div style="background: #ffffff; border-bottom: 1px solid #eaeaea; padding: 40px 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <span class="section-tag">Marketplace Ecosystem</span>
+        <h1 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; margin: 4px 0 0;">Verified Brand Stores</h1>
+        <p style="color: #71717a; margin-top: 4px;">Directly browse flagship stores, verified merchants, and specialty ateliers across Bangladesh.</p>
+      </div>
+
+      <div>
+        <a href="/seller-register.html" class="btn btn-primary">
+          <i class="fas fa-store"></i> Open Your Store on Zenvy
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sellers Grid -->
+  <main class="container" style="padding: 48px 24px;">
+    <div id="sellers-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px;">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-main" style="margin-top: 60px;">
+    <div class="container" style="text-align: center; padding: 30px 0; color: #71717a; font-size: 0.85rem;">
+      <div style="color: #a1a1aa; margin-bottom: 4px;">&copy; 2026 Zenvy Wear. All Rights Reserved.</div>
+      <div>Designed &amp; Developed by <strong style="color: #f4f4f5;">MD Masum Parvej</strong></div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    let allSellers = [];
+
+    async function loadSellers() {
+      const container = document.getElementById('sellers-container');
+      const res = await apiRequest('/sellers?status=approved');
+
+      if (res.ok && res.data && res.data.sellers) {
+        allSellers = res.data.sellers;
+        renderSellers(allSellers);
+      } else {
+        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px;">No sellers found.</div>`;
+      }
+
+      const searchInput = document.getElementById('seller-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          const q = searchInput.value.toLowerCase().trim();
+          const filtered = allSellers.filter(s => 
+            s.storeName.toLowerCase().includes(q) || 
+            s.category.toLowerCase().includes(q) ||
+            s.description.toLowerCase().includes(q)
+          );
+          renderSellers(filtered);
+        });
+      }
+    }
+
+    function renderSellers(sellers) {
+      const container = document.getElementById('sellers-container');
+      if (sellers.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #71717a;">No matching stores found.</div>`;
+        return;
+      }
+
+      container.innerHTML = sellers.map(s => `
+        <div style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
+          <div style="height: 120px; position: relative; background: #111;">
+            <img src="${s.banner}" alt="${s.storeName}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.45;">
+            <div style="position: absolute; top: 12px; right: 12px;">
+              <span class="seller-tag-badge seller-tag-official"><i class="fas fa-certificate"></i> Official Verified</span>
+            </div>
+          </div>
+
+          <div style="padding: 20px; position: relative; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="margin-top: -46px; margin-bottom: 14px; display: flex; align-items: flex-end; gap: 14px;">
+                <img src="${s.logo}" alt="${s.storeName}" style="width: 64px; height: 64px; border-radius: 50%; border: 3px solid #fff; box-shadow: var(--shadow-md); object-fit: cover; background: #fff;">
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0;">${s.storeName}</h3>
+                  <span style="font-size: 0.8rem; color: #71717a;"><i class="fas fa-tag" style="margin-right: 4px;"></i> ${s.category}</span>
+                </div>
+              </div>
+
+              <p style="font-size: 0.85rem; color: #52525b; line-height: 1.6; margin-bottom: 16px;">
+                ${s.description}
+              </p>
+
+              <div style="font-size: 0.8rem; color: #71717a; margin-bottom: 16px;">
+                <i class="fas fa-map-marker-alt" style="margin-right: 6px;"></i> ${s.address}
+              </div>
+            </div>
+
+            <div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); background: #f9f9f9; border-radius: var(--radius-sm); padding: 10px; text-align: center; margin-bottom: 16px;">
+                <div>
+                  <div style="font-weight: 700; font-size: 1rem;">${s.rating} <i class="fas fa-star" style="color:#f59e0b; font-size:0.75rem;"></i></div>
+                  <div style="font-size: 0.7rem; color: #71717a; text-transform: uppercase;">Rating</div>
+                </div>
+                <div>
+                  <div style="font-weight: 700; font-size: 1rem; color: #16a34a;">${s.positiveResponseRate}%</div>
+                  <div style="font-size: 0.7rem; color: #71717a; text-transform: uppercase;">Positive</div>
+                </div>
+                <div>
+                  <div style="font-weight: 700; font-size: 1rem;">${s.ratingCount || 120}+</div>
+                  <div style="font-size: 0.7rem; color: #71717a; text-transform: uppercase;">Reviews</div>
+                </div>
+              </div>
+
+              <a href="/seller-store.html?id=${s._id}" class="btn btn-primary" style="width: 100%; text-align: center;">
+                Visit Store Front <i class="fas fa-arrow-right" style="font-size: 0.75rem; margin-left: 6px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSellers);
+  </script>
+</body>
+</html>
